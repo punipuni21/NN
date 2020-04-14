@@ -1,0 +1,3 @@
+﻿  NN.cpp
+C:\Users\Kazue\Documents\GitHub\git_test\NN\NN\NN.cpp(13,12): warning C4101: 'x': ローカル変数は 1 度も使われていません。
+  NN.vcxproj -> C:\Users\Kazue\Documents\GitHub\git_test\NN\Debug\NN.exe
