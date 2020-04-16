@@ -1,28 +1,43 @@
-﻿// NN.cpp : このファイルには 'main' 関数が含まれています。プログラム実行の開始と終了がそこで行われます。
-//
+﻿#pragma warning(disable: 4996)
+
 #include "header.h"
-#include "func.cpp"
 
-#define IN_NUM 3    //入力数
-#define OUT_NUM 1   //出力数
-#define LAYER_NUM 1 //層数
-#define M_NUM 4 //中間層の素子数
 
-int main()
+
+int main(void)
 {
-    double x[IN_NUM], y[OUT_NUM];
+	FILE* fp;
+
+	int Flag = TRUE;
+	double studyRate = 0.5;
+	int i, j;
+
+	//alternative
+	D[0] = 3, D[1] = 4, D[2] = 1;
+	
+	if ((fp = fopen("test_in.csv", "r")) == NULL) {
+		cout << "Input File Open ERROR!" << endl;
+		return 0;
+	}
+	for (i = 0; i < IN_NUM; i++) {
+		//if (fscanf(fp, "%lf", &layerOut[0][i]) == EOF) {
+		//	break;
+		//}
+		fscanf(fp, "%lf", &z[0][i]);
+	}
+	
+	
+
+	//wの初期設定
+	
+
+	/*while (Flag == TRUE) {
+
+	}
+	*/
+
 
 
     return 0;
 }
 
-// プログラムの実行: Ctrl + F5 または [デバッグ] > [デバッグなしで開始] メニュー
-// プログラムのデバッグ: F5 または [デバッグ] > [デバッグの開始] メニュー
-
-// 作業を開始するためのヒント: 
-//    1. ソリューション エクスプローラー ウィンドウを使用してファイルを追加/管理します 
-//   2. チーム エクスプローラー ウィンドウを使用してソース管理に接続します
-//   3. 出力ウィンドウを使用して、ビルド出力とその他のメッセージを表示します
-//   4. エラー一覧ウィンドウを使用してエラーを表示します
-//   5. [プロジェクト] > [新しい項目の追加] と移動して新しいコード ファイルを作成するか、[プロジェクト] > [既存の項目の追加] と移動して既存のコード ファイルをプロジェクトに追加します
-//   6. 後ほどこのプロジェクトを再び開く場合、[ファイル] > [開く] > [プロジェクト] と移動して .sln ファイルを選択します
