@@ -20,7 +20,7 @@ int main(void)
 	FILE* fp2;
 
 	int Flag = TRUE;
-	double studyRate = 0.1;
+	double studyRate = 0.01;
 
 	//alternative
 	D[0] = 3, D[1] = 4, D[2] = 1;
@@ -61,7 +61,7 @@ int main(void)
 	}
 	cout << "差分:" << difference << endl;
 	cout << "------------------------------------------------------------" << endl;
-	lump(studyRate);
+	serial(studyRate);
 	difference = 0;
 	cout << "ＮＮ結果:--------------------------------------------------" << endl;
 	for (int i = 0; i < DATASET_NUM; i++) {

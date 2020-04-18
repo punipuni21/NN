@@ -26,6 +26,7 @@ void serial(double studyRate) {
 		//ãtì`îd
 		backwordS(n, studyRate);
 		count++;
+		cout << "ç∑ï™:" << difference << endl;
 	}
 	
 
@@ -128,26 +129,36 @@ void backwordS(int n, double studyRate) {
 	for (i = LAYER_NUM; i >= 0; i--) {
 		//ç≈â∫ëwÇÃèÍçá
 		if (i == LAYER_NUM) {
-			for (k = 0; k < D[i+1]; k++) {
+			for (k = 0; k < D[i+1]; k++) {	//k:èoóÕëwÇÃí Çµî‘çÜ
 				for (j = 0; j < D[i]; j++) {
 					dLda[i + 1][k] = 1 / d * 2 * (z[i + 1][k] - tOut[n][k]) * z[i + 1][k] * (1 - z[i + 1][k]);
-					w[i][j][k] -=  studyRate * z[i][j] * dLda[i+1][k];
+					//w[i][j][k] -= studyRate * z[i][j] * dLda[i + 1][k];
 				}
 			}
 		}
 		else {	//ç≈â∫ëwÇ≈Ç»Ç¢èÍçá
-			for (k = 0; k < D[i + 1]; k++) {
-				for (j = 0; j < D[i]; j++) {
-					dLdaSum = 0;
-					for (l = 0; l < D[i + 2]; l++)
-						dLdaSum += dLda[i + 2][l] * w[i + 1][k][l];
-					dLda[i + 1][k] = z[i+1][k]*(1-z[i+1][k])*dLdaSum;
-					w[i][j][k] -= studyRate * z[i][j] * dLda[i + 1][k];
+			for (k = 0; k < D[i + 1]; k++) {	//åªç›ÇÃëwÇÃí Çµî‘çÜ
+				for (j = 0; j < D[i]; j++) {	//Ç–Ç∆Ç¬ëOÇÃëwÇÃí Çµî‘çÜ
+					dLda[i + 1][k] = 0;
+					for (l = 0; l < D[i + 2]; l++) {
+						dLda[i + 1][k] += dLda[i + 2][l] * w[i + 1][k][l] * z[i + 2][l] * (1 - z[i + 2][l]);
+					}
+					//dLdaSum = 0;
+					//for (l = 0; l < D[i + 2]; l++)
+					//	dLdaSum += dLda[i + 2][l] * w[i + 1][k][l];
+					//dLda[i + 1][k] = z[i + 1][k] * (1 - z[i + 1][k]) * dLdaSum;
+					//w[i][j][k] -= studyRate * z[i][j] * dLda[i + 1][k];
 				}
 			}
 		}
 	}
-
+	for (i = LAYER_NUM; i >= 0; i--) {
+		for (k = 0; k < D[i + 1]; k++) {	//åªç›ÇÃëwÇÃí Çµî‘çÜ
+			for (j = 0; j < D[i]; j++) {	//Ç–Ç∆Ç¬ëOÇÃëwÇÃí Çµî‘çÜ
+				w[i][j][k] -= studyRate * dLda[i + 1][k] * z[i][j] * z[i + 1][k] * (1 - z[i + 1][k]);
+			}
+		}
+	}
 }
 
 //èdÇ›èâä˙âªä÷êî

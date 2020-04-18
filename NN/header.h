@@ -15,8 +15,8 @@
 #define M_NUM 4 //中間層の素子数
 #define NMAX 10  //最大数
 #define DATASET_NUM 6 //データセット数
-#define Threshold 0.5	//しきい値
-#define COUNTMAX 10000000	//最大試行回数
+#define Threshold 0.01	//しきい値
+#define COUNTMAX 5000	//最大試行回数
 
 extern double x[IN_NUM];
 extern double y[OUT_NUM];

@@ -1,1 +1,4 @@
-﻿  NN.vcxproj -> C:\Users\Kazue\Documents\GitHub\NN\Debug\NN.exe
+﻿  func.cpp
+C:\Users\Kazue\Documents\GitHub\NN\NN\func.cpp(125,9): warning C4101: 'dLdaSum': ローカル変数は 1 度も使われていません。
+C:\Users\Kazue\Documents\GitHub\NN\NN\func.cpp(166,12): warning C4244: '引数': 'time_t' から 'unsigned int' への変換です。データが失われる可能性があります。
+  NN.vcxproj -> C:\Users\Kazue\Documents\GitHub\NN\Debug\NN.exe
