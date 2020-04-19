@@ -18,12 +18,10 @@
 #define Threshold 0.01	//しきい値
 #define COUNTMAX 5000	//最大試行回数
 
-extern double x[IN_NUM];
-extern double y[OUT_NUM];
-extern double w[LAYER_NUM + 1][NMAX][NMAX];
+extern double w[LAYER_NUM + 1][NMAX][NMAX];//w[l][i][j]:l層i番目の出力を(l+1)層j番目の入力に伝達するときの重み
 extern int D[LAYER_NUM + 2];	//各層のデータ数
-extern double a[LAYER_NUM + 2][NMAX];	//各層への入力
-extern double z[LAYER_NUM + 2][NMAX];	//各層からの出力
+extern double a[LAYER_NUM + 2][NMAX];	//a[l][i]:l層i番目の素子への入力(前層からの出力*重みの和)
+extern double z[LAYER_NUM + 2][NMAX];	//z[l][i]:l層i番目の素子からの出力(aを活性化関数に通したもの)
 extern double tIn[DATASET_NUM][NMAX];	//教師データ(入力)
 extern double tOut[DATASET_NUM][NMAX];	//教師データ(出力)
 

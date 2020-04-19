@@ -37,16 +37,20 @@ void serial(double studyRate) {
 void lump(double studyRate) {
 	int i, j, k, l, n, count = 0;
 	double dNum = DATASET_NUM;
-	double dLdaSum;
 	double d = D[LAYER_NUM + 1];	//平均をとるため出力層の要素数使用
-	double dLda[LAYER_NUM + 2][NMAX] = {0};
+	double dLda[LAYER_NUM + 2][NMAX] = {0};	//各層への入力をa、出力をzとし、損失関数を出力で割ったもの
 	double difference;
+	//dNum:学習用のデータセット数
+	//D[l]:l層におけるデータ数（素子数）
+	//dLda[l][i]:損失関数Lをl層i番目の入力の出力aで微分した値
+	//difference:誤差の和(損失関数の和)
 	//z[0] = x(入力値)
 	while (count < COUNTMAX) {
 		count++;
+
 		//順伝播
 		difference = 0;
-		for (n = 0; n < DATASET_NUM; n++) {
+		for (n = 0; n < DATASET_NUM; n++) {	//全データセットを入力する
 			difference += forward(n);	//n番目のデータセットを通す
 			//データセットを通すたびにdL/daを計算し、それぞれのdL/daの和をとる
 			for (i = LAYER_NUM; i >= 0; i--) {
@@ -61,10 +65,9 @@ void lump(double studyRate) {
 				else {	//最下層でない場合
 					for (k = 0; k < D[i + 1]; k++) {
 						for (j = 0; j < D[i]; j++) {
-							dLdaSum = 0;
+							dLda[i + 1][k] = 0;
 							for (l = 0; l < D[i + 2]; l++)
-								dLdaSum += dLda[i + 2][l] * w[i + 1][k][l];
-							dLda[i + 1][k] += z[i + 1][k] * (1 - z[i + 1][k]) * dLdaSum;
+								dLda[i + 1][k] += dLda[i + 2][l] * w[i + 1][k][l] * z[i + 1][k] * (1 - z[i + 1][k]);
 						}
 					}
 				}
@@ -93,6 +96,7 @@ void lump(double studyRate) {
 				}
 			}
 		}
+		cout << "差分:" << difference << endl;
 	}
 	return;
 }
@@ -100,7 +104,7 @@ void lump(double studyRate) {
 //順伝播
 double forward(int n) {	//n:データセットの番号
 	int i, j, k;
-	double difference = 0;
+	double difference = 0, d = D[LAYER_NUM + 1];
 	for (i = 0; i < IN_NUM; i++)
 		z[0][i] = tIn[n][i];	//教師データをz[0]に代入
 
@@ -116,15 +120,18 @@ double forward(int n) {	//n:データセットの番号
 	for (i = 0; i < D[LAYER_NUM + 1]; i++) {
 		difference += pow(z[LAYER_NUM + 1][i] - tOut[n][i], 2);	//教師データとの差分の二乗を返す
 	}
-	return difference;
+	return difference / d;	//出力誤差の平均(1出力当たりの誤差)を返す
 }
 
 //逆誤差伝播(逐次)
 void backwordS(int n, double studyRate) {
 	int i, j, k, l;
-	double dLdaSum;
 	double d = D[LAYER_NUM + 1];	//平均をとるため出力層の要素数使用
 	double dLda[LAYER_NUM+2][NMAX];
+	//D[l]:l層におけるデータ数（素子数）
+	//dLda[l][i]:損失関数Lをl層i番目の入力の出力aで微分した値
+	//difference:誤差の和(損失関数の和)
+	//z[0] = x(入力値)
 
 	for (i = LAYER_NUM; i >= 0; i--) {
 		//最下層の場合

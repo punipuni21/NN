@@ -61,7 +61,7 @@ int main(void)
 	}
 	cout << "差分:" << difference << endl;
 	cout << "------------------------------------------------------------" << endl;
-	serial(studyRate);
+	lump(studyRate);
 	difference = 0;
 	cout << "ＮＮ結果:--------------------------------------------------" << endl;
 	for (int i = 0; i < DATASET_NUM; i++) {
