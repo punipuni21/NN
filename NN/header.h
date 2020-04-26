@@ -5,31 +5,29 @@
 #include <cmath>
 #include <vector>
 #include <random>
+#include <fstream>
+#include <string>
+#include <sstream>
 
 #define TRUE 0
 #define FALSE 1
 
 #define IN_NUM 3    //入力数
 #define OUT_NUM 1   //出力数
-#define LAYER_NUM 1 //層数
+#define MIDDLE_NUM 4	//中間層ノード数
+#define LAYER_NUM 1 //中間層数
 #define M_NUM 4 //中間層の素子数
-#define NMAX 10  //最大数
+#define NMAX 10  //ノードの最大数
 #define DATASET_NUM 6 //データセット数
+#define STUDYRATE 0.1	//学習率
 #define Threshold 0.01	//しきい値
 #define COUNTMAX 5000	//最大試行回数
-
-extern double w[LAYER_NUM + 1][NMAX][NMAX];//w[l][i][j]:l層i番目の出力を(l+1)層j番目の入力に伝達するときの重み
-extern int D[LAYER_NUM + 2];	//各層のデータ数
-extern double a[LAYER_NUM + 2][NMAX];	//a[l][i]:l層i番目の素子への入力(前層からの出力*重みの和)
-extern double z[LAYER_NUM + 2][NMAX];	//z[l][i]:l層i番目の素子からの出力(aを活性化関数に通したもの)
-extern double tIn[DATASET_NUM][NMAX];	//教師データ(入力)
-extern double tOut[DATASET_NUM][NMAX];	//教師データ(出力)
+#define DIS_DATASET_NUM 2 //データセット数
 
 using namespace std;
 
 double sigmoid(double x);	//活性化関数(シグモイド関数)
-void serial(double studyRate);	//逐次学習
-void lump(double studyRate);	//一括学習
-double forward(int n);	//順伝播
-void backwordS(int n, double studyRate);	//逆誤差伝播(逐次)
-void wInit();	//重み初期化関数
+void serial(vector<vector<vector<double>>>& w, vector<vector<double>> tIn, vector<vector<double>> tOut);	//逐次学習
+void lump(vector<vector<vector<double>>>& w, vector<vector<double>> tIn, vector<vector<double>> tOut);	//一括学習
+double forward(int n, vector<vector<double>> tIn, vector<vector<double>> tOut, vector<vector<vector<double>>>& a, vector<vector<vector<double>>>& z, vector<vector<vector<double>>> w);	//順伝播
+void wInit(vector<vector<vector<double>>>& w);	//重み初期化関数
