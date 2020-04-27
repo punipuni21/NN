@@ -1,2 +1,8 @@
-﻿  NN.cpp
+﻿  func.cpp
+C:\Users\Kazue\Documents\GitHub\NN\NN\func.cpp(25,11): warning C4244: '引数': 'double' から 'const unsigned int' への変換です。データが失われる可能性があります。
+C:\Users\Kazue\Documents\GitHub\NN\NN\func.cpp(25,28): warning C4244: '引数': 'double' から 'const unsigned int' への変換です。データが失われる可能性があります。
+C:\Users\Kazue\Documents\GitHub\NN\NN\func.cpp(25,49): warning C4244: '引数': 'double' から 'const unsigned int' への変換です。データが失われる可能性があります。
+C:\Users\Kazue\Documents\GitHub\NN\NN\func.cpp(125,11): warning C4244: '引数': 'double' から 'const unsigned int' への変換です。データが失われる可能性があります。
+C:\Users\Kazue\Documents\GitHub\NN\NN\func.cpp(125,28): warning C4244: '引数': 'double' から 'const unsigned int' への変換です。データが失われる可能性があります。
+C:\Users\Kazue\Documents\GitHub\NN\NN\func.cpp(125,49): warning C4244: '引数': 'double' から 'const unsigned int' への変換です。データが失われる可能性があります。
   NN.vcxproj -> C:\Users\Kazue\Documents\GitHub\NN\Debug\NN.exe

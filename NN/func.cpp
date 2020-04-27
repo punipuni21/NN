@@ -219,7 +219,15 @@ double forward(int n, vector<vector<double>> tIn, vector<vector<double>> tOut, v
 	//a[n][l][k]:n番目データのl層kノードへの入力値
 	//z[n][l][k]:n番目データのl層kノードからの出力値
 	//w[l][i][j]:l層i番目の出力を(l+1)層j番目の入力に伝達するときの重み
-
+	int D[LAYER_NUM + 2];
+	for (int l = 0; l < LAYER_NUM + 2; l++) {
+		if (l == 0)
+			D[l] = IN_NUM;
+		else if (l == LAYER_NUM + 1)
+			D[l] = OUT_NUM;
+		else
+			D[l] = MIDDLE_NUM;
+	}
 	//aを0で初期化
 	for (int l = 0; l < LAYER_NUM + 2; l++) {
 		for (int k = 0; k < NMAX; k++) {
